@@ -1,0 +1,77 @@
+<mvc:View xmlns:mvc='sap.ui.core.mvc' 
+		  xmlns:f='sap.ui.layout.form' 
+          xmlns:core='sap.ui.core' 
+		  xmlns='sap.m' 
+		  xmlns:l="sap.ui.layout"
+		  controllerName="sapOdata.controller.Add">
+<Page >
+<content>
+		<f:SimpleForm id="SimpleFormChange354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Product Data"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="Product ID" />
+				<Input id="productid" value="{hulk>/Product_data/PRODUCT_ID}" />
+				<Label text="Product Name" />
+				<Input value="{hulk>/Product_data/NAME}">
+				</Input>
+				<Label text="Description" />
+				<Input value="{hulk>/Product_data/DESCRIPTION}">
+				</Input>
+				<!-- <Input value="{hulk>/Product_data/DESCRIPTION}">
+					<layoutData>
+						<l:GridData span="XL1 L2 M2 S4" />
+					</layoutData>
+				</Input> -->
+				<Label text="Supplier ID" />
+				<Input value="{hulk>/Product_data/SUPPLIER_ID}">
+				</Input>
+				<Label text="Supplier Name" />
+				<Input value="{hulk>/Product_data/SUPPLIER_NAME}">
+				</Input>
+				<Label text="Price / Currency" />
+				<Input value="{hulk>/Product_data/PRICE}">
+					<layoutData>
+						<l:GridData span="XL1 L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<!-- <Input value="{hulk>/Product_data/CURRENCY_CODE}">
+					<layoutData>
+						<l:GridData span="XL1 L2 M2 S4" />
+					</layoutData>
+				</Input> -->
+				<Input value="{hulk>/Product_data/CURRENCY_CODE}" />
+				<Label text="Category" />
+				<Select id="category" selectedKey="{hulk>/Product_data/CATEGORY}">
+					<items>
+						<core:Item text="Mice" key="Mice"/>
+						<core:Item text="Projectors" key="Projectors"/>
+						<core:Item text="Notebooks" key="Notebooks"/>
+					</items>
+				</Select>
+			</f:content>
+		</f:SimpleForm>
+</content>
+<footer>
+<Toolbar>
+<ToolbarSpacer></ToolbarSpacer>
+<Button id="idSave" type="Accept" text="Save" icon="sap-icon://save" press="onSave"></Button>
+<Button id="idCancel" type="Emphasized" text="Cancel" icon="sap-icon://cancel" press="onClear"></Button>
+</Toolbar>
+</footer>
+</Page>
+</mvc:View>

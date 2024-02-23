@@ -1,0 +1,36 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sapOdata.controller.View1">
+<Page title="{i18n>Title}" >
+<SearchField id="idSearch" search="onSearch" liveChange="onSearch"></SearchField>
+<headerContent><Button id="idBtn" text="Go to View2" press="callView"></Button></headerContent>
+<List id="idList" delete="onDelete" mode="SingleSelectMaster" selectionChange="onSelect"
+items="{path:'/ProductSet/'}" growing="true" growingThreshold="11">
+<!-- <headerToolbar>
+<Toolbar >
+<Button id="idBtn2" icon="sap-icon://delete" press="onClick"></Button>
+</Toolbar>
+</headerToolbar> -->
+<items>
+<ObjectListItem intro="{PRODUCT_ID}" 
+                number="{PRICE}" 
+                numberUnit="{CURRENCY_CODE}" 
+                title="{CATEGORY}"
+                icon="{PRODUCT_PIC_URL}">
+<ObjectAttribute text="{SUPPLIER_ID}" title="{SUPPLIER_NAME}"></ObjectAttribute>
+<ObjectAttribute text="{NAME}" title="Name "></ObjectAttribute>
+<firstStatus>
+<!-- <ObjectStatus text="{path:'json>availability',formatter:'.formatter.getDhaval'}" state="{path:'json>availability',formatter:'.formatter.getColour'}"></ObjectStatus> -->
+</firstStatus>
+<secondStatus>
+<ObjectStatus text="{WEIGHT_MEASURE}" title="Weight"></ObjectStatus>
+</secondStatus>
+</ObjectListItem>
+</items>
+</List>
+<footer>
+<Toolbar>
+<ToolbarSpacer ></ToolbarSpacer>
+<Button icon="sap-icon://add" press="onManage"></Button>
+</Toolbar>
+</footer>
+</Page>
+</mvc:View>

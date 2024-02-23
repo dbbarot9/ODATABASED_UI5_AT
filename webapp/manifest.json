@@ -1,0 +1,128 @@
+{
+    "sap.app":
+    {
+        "id": "sapOdata",
+        "type": "application",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title":"{{appTitle}}",
+        "description":"{{appDescription}}",
+        "i18n": "i18n/i18n.properties",
+        "ach": "SO-OTC",
+        "tags": {
+            "keywords": ["OData","UI5 App"]
+        },
+        "_version": "1.1.0",
+        "dataSources": {
+            "mainService":{
+                "type": "OData",
+                "uri": "/sap/opu/odata/sap/ZDB_JAN_PD1_SRV/",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "deviceTypes":{
+            "desktop": true,
+            "phone": true,
+            "tablet": true
+        },
+        
+        "fullWidth": true,
+        "supportedThemes": ["sap_belize_plus"]
+    },
+    "sap.ui5":{
+        "library": {
+            "css":"style/mycss.css"
+        },
+        "dependencies": {
+            "minUI5Version": "",
+            "libs": {
+                "sap.m":{"minVersion": ""},
+                "sap.ui.layout":{"minVersion": ""}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "rootView":{
+            "viewName": "sapOdata.view.App",
+            "type": "XML",
+            "id": "idRootView"
+        },
+        "routing": {
+            "config":{
+                "viewPath": "sapOdata.view",
+                "viewType": "XML",
+                "controlId": "idAppCon",
+                "clearControlAggregation": true
+                
+            },
+            "routes":[{
+                "pattern": "",
+                "name": "home",
+                "target":["narendra","modi"]
+            },
+        {
+            "pattern": "id/{id}",
+            "name": "detail",
+            "target":["narendra","putin"]
+        },
+        {
+            "pattern": "manageProduct",
+            "name": "add",
+            "target":["narendra","macron"]
+        }],
+            "targets": {
+                "narendra":{
+                    "viewName": "View1",
+                    "viewId": "idView1",
+                    "viewType": "XML",
+                    "controlAggregation": "masterPages"
+                },
+                "modi":{
+                    "viewName": "Empty",
+                    "viewId": "idEmpty",
+                    "viewType": "XML",
+                    "controlAggregation": "detailPages"
+                },
+                "putin":{
+                    "viewName": "View2",
+                    "viewId": "idView2",
+                    "viewType": "XML",
+                    "controlAggregation": "detailPages"
+                },
+                "macron":{
+                    "viewName": "Add",
+                    "viewId": "idAdd",
+                    "viewType": "XML",
+                    "controlAggregation": "detailPages"
+                }
+            }
+        },
+        "models": {
+           
+            "i18n":{
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleUrl": "i18n/i18n.properties"
+                }
+            },
+            "json":{
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "mockdata/fruits.json"
+            },
+            "":{
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "dataSource": "mainService",
+                "settings": {}
+            }
+        }
+    }
+   
+}
