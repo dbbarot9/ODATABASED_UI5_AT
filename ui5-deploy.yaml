@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.2"
+metadata:
+  name: odataui5project
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://11.11.11.14:8010
+          client: "100"
+        app:
+          name: YY1_ZINNOTRACK
+          description: Innotrack Application for tracking
+          package: ZGPS_PACKAGE
+          transport: P20K900280
+        exclude:
+          - /test/

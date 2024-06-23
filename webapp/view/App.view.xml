@@ -1,5 +1,6 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc"
           xmlns="sap.m"
-          controllerName="sapOdata.controller.App"> 
-        <SplitApp id="idAppCon"></SplitApp>
+          controllerName="odataui5project.controller.App"> 
+        <App id="idAppCon">  
+        </App>
 </mvc:View>

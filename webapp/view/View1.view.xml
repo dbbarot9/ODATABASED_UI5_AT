@@ -1,36 +1,161 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sapOdata.controller.View1">
-<Page title="{i18n>Title}" >
-<SearchField id="idSearch" search="onSearch" liveChange="onSearch"></SearchField>
-<headerContent><Button id="idBtn" text="Go to View2" press="callView"></Button></headerContent>
-<List id="idList" delete="onDelete" mode="SingleSelectMaster" selectionChange="onSelect"
-items="{path:'/ProductSet/'}" growing="true" growingThreshold="11">
-<!-- <headerToolbar>
-<Toolbar >
-<Button id="idBtn2" icon="sap-icon://delete" press="onClick"></Button>
-</Toolbar>
-</headerToolbar> -->
-<items>
-<ObjectListItem intro="{PRODUCT_ID}" 
-                number="{PRICE}" 
-                numberUnit="{CURRENCY_CODE}" 
-                title="{CATEGORY}"
-                icon="{PRODUCT_PIC_URL}">
-<ObjectAttribute text="{SUPPLIER_ID}" title="{SUPPLIER_NAME}"></ObjectAttribute>
-<ObjectAttribute text="{NAME}" title="Name "></ObjectAttribute>
-<firstStatus>
-<!-- <ObjectStatus text="{path:'json>availability',formatter:'.formatter.getDhaval'}" state="{path:'json>availability',formatter:'.formatter.getColour'}"></ObjectStatus> -->
-</firstStatus>
-<secondStatus>
-<ObjectStatus text="{WEIGHT_MEASURE}" title="Weight"></ObjectStatus>
-</secondStatus>
-</ObjectListItem>
-</items>
-</List>
-<footer>
-<Toolbar>
-<ToolbarSpacer ></ToolbarSpacer>
-<Button icon="sap-icon://add" press="onManage"></Button>
-</Toolbar>
-</footer>
-</Page>
+<mvc:View
+		controllerName="odataui5project.controller.View1"
+		height="100%"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:svm="sap.ui.comp.smartvariants"
+		xmlns:l="sap.ui.layout">
+		<Page enableScrolling="true" title="InnoTrack Application" titleLevel="H1" titleAlignment="Start">
+		<Image ariaDetails="detailsActiveImage" src="./IMAGE/logo.png" width="" height="5em" mode="Image"></Image> 
+		<f:SimpleForm editable="true" width="100%" backgroundDesign="Translucent">
+		<!-- <Image src="./IMAGE/logo.png" width="40%" height="30%"></Image> -->
+		<f:content>
+		<Label text="{i18n>HDR_Delivery}" design="Bold"></Label>
+		  <MultiInput width="40%"
+			id="multiInput"
+			suggestionItems="{
+				path: '/VBELN_F4Set'
+					}"
+			valueHelpRequest=".onValueHelpRequested">
+			<core:Item key="{VBELN}" text="" />
+		
+		<suggestionColumns>
+				<Column>
+					<Label text="Delivery No"/>
+				</Column>
+			</suggestionColumns>
+			<suggestionRows>
+				<ColumnListItem>
+					<Label text="{VBELN}" />
+				</ColumnListItem>
+			</suggestionRows>
+			</MultiInput>  
+		<Label text="Customer Name" design="Bold"></Label>
+		<MultiComboBox id="idCombo" width="40%" items="{ path: '/KUNNR_F4Set',
+								sorter : {path:'KUNNR'}
+								}"
+								selectionChange="handleSelectionChange"
+								>
+                        <items>
+                            <core:Item id="idCombo1" text="{KUNNR}" key="{NAME1}" />
+                        </items>
+                    </MultiComboBox>
+						<Label text="DateRangeSelection" labelFor="DRS1"/>
+		<DateRangeSelection
+			id="DRS1"
+			class="DRS1" width="40%"
+			value= "{
+				'type': 'sap.ui.model.type.DateInterval',
+				'formatOptions': {
+					'pattern': 'yyyy/MM/dd'
+				},
+				'parts': [
+					{
+						'type': 'sap.ui.model.type.Date',
+						'path': '/start'
+					},
+					{
+						'type': 'sap.ui.model.type.Date',
+						'path': '/end'
+					}
+				]
+			}"
+			change="handleChange"/>
+		<Button type="Accept" text="{i18n>HDR_SUBMIT}" icon="sap-icon://show" press="onSearch" width="40%"></Button>
+		
+		
+		<!-- <Image src="./IMAGE/logo.png" width="10em" height="10em"></Image>  -->
+			
+		 
+		</f:content>
+		</f:SimpleForm>
+		<content>
+		<Table id="table"
+		inset="false" growing="true" fixedLayout="false" growingThreshold="50"
+		  items="{
+			path: '',
+			parameters:{
+			$count:true
+			},
+			sorter: {
+				path: 'VBELN',
+				descending: true,
+				group: true
+			} 
+			}" sticky="ColumnHeaders,HeaderToolbar"> 
+		<headerToolbar>
+				<OverflowToolbar>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://excel-attachment" press="onExport"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			
+		<columns>
+			<Column
+				width="12em">
+				<header><Text text="{i18n>HDR_Delivery}" /></header>
+				
+			</Column>
+			<Column	width="12em">
+				<header><Text text="{i18n>HDR_KUNNR}" /></header>
+			</Column>
+			<Column
+				width="12em" minScreenWidth="Tablet" >
+				<header><Text text="{i18n>HDR_MATNR}" /></header>
+			</Column>
+			<Column
+				width="12em" minScreenWidth="Tablet" >
+				<header><Text text="{i18n>HDR_CHARG}" /></header>
+			</Column>
+			<Column
+				width="12em" minScreenWidth="Tablet" demandPopin="true" >
+				<header><Text text="{i18n>HDR_LOC}" /></header>
+			</Column>
+			<Column
+				width="25em">
+				<header><Text text="Text" /></header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle" id="idColoumn">
+				<cells>
+					<ObjectIdentifier
+						title="{VBELN}"
+						text="{POSNR}"/>
+					<Text
+						text="{KUNNR} / {NAME1}" />
+					<!-- <Text
+						text="{NAME1}" /> -->
+					<Text
+						text="{MATNR}" />
+					<Text
+						text="{CHARG}" />	
+					<Text
+						text="{ORT01}-{LAND1}" />			
+					<!-- <Text
+						text="{ZZDEVICENO}" />		 -->
+					<VBox width="80%" ><Text text="Device No. : {Device}" id="idDevice" textAlign="Left"/>	
+					<Text text="Temperature : {Temp}" id="idTemp"/>
+					<Text text="Date : {date}" id="idDate"/>
+					<Text text="Latitude : {latitude}" id="idLatitude"/>
+					<Text text="Longitude : {longitude}" id="idLongitude"/>
+					<Text text="Location : {location}" id="idLocation"/>
+					<Text text="Batch#: : {batchno}" id="idBatch"/>
+					<Text text="Status : {status}" id="idStatus"/>
+					<Text text="Light : {light}" id="idLight"/>
+					<Text text="Orientation : {orientation}" id="idorientation"/>
+					<Text text="Battery : {battery}" id="idBattery"/>
+					<Text text="Pressure : {pressure}" id="idPressure"/>
+					<Text text="Humidity : {humidity}" id="idHumidity"/>
+					<Text text="Handling Unit : {hu}" id="idHu"/>
+					<Text text="{Text}" id="idText1"/></VBox>		
+							
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table></content>
+	</Page>
 </mvc:View>

@@ -1,5 +1,0 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sapOdata.controller.Empty">
-<Page >
-<Image src="https://cdn.vox-cdn.com/thumbor/WvAKZX7Hl7Z7mg-ekthIeO_gg5Q=/0x0:3805x2047/1200x675/filters:focal(1157x817:1765x1425)/cdn.vox-cdn.com/uploads/chorus_image/image/70416979/avengers_battle_of_new_york.0.jpg" height="100%" width="100%"></Image>
-</Page>
-</mvc:View>

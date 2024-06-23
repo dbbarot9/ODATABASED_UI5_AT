@@ -1,12 +1,13 @@
 sap.ui.define(['sap/ui/core/UIComponent'],
 function(UIComponent) {
-    'use strict';
-    return UIComponent.extend("sapOdata.Component",{
+    "use strict";
+    return UIComponent.extend("odataui5project.Component",{
         metadata:{
             manifest:"json"
         },
         init:function(){
             // set UI component as parent component so we can access methods of parent component
+            debugger;
              UIComponent.prototype.init.apply(this);
            // define router object of UI component
             var oRouter = this.getRouter();
